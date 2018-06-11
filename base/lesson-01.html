@@ -6,16 +6,19 @@
     <script src="js/react.development.v16.4.0.js"></script>
     <script src="js/react-dom.development.v16.4.0.js"></script>
     <script src="js/babel.min.js"></script>
+    <style type="text/css">
+    	.abc{
+    		color: red;
+    		font-size: 60px;
+    	}
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="text/babel">
-	  var styleObj = {
-	  	color:'red',
-	  	fontSize:'60px'
-	  };
+
       ReactDOM.render(
-        <h1 style={styleObj}>Hello, world!</h1>,
+        <h1 className="abc">Hello, world!</h1>,
         document.getElementById('root')
       );
 
