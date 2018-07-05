@@ -24,12 +24,23 @@ ReactDOM.render(
 
 //元素渲染
 function tick() {
-    const element = (
+    const timeEle = (
         <div>
             <h2>It is {new Date().toLocaleTimeString()}.</h2>
         </div>
     );
-    ReactDOM.render(element, document.getElementById('time'));
+    ReactDOM.render(timeEle, document.getElementById('time'));
 }
 
 setInterval(tick, 1000);
+
+//自定义组件
+function Welcome(props) {
+    return <h1>欢迎你, {props.name}</h1>;
+}
+
+const diyEle = <Welcome name="小官" />;
+ReactDOM.render(
+    diyEle,
+    document.getElementById('diyComponent')
+);
