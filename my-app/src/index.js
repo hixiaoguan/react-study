@@ -232,3 +232,70 @@ ReactDOM.render(
     <LoginControl />,
     document.getElementById('loginControl')
 );
+
+/**
+ * 与运算符 && 更简洁的 条件判断
+ * 在 JavaScript 中，true && expression 总是返回 expression，而 false && expression 总是返回 false。
+ */
+function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+    return (
+        <div>
+            <h1>与运算符 && 更简洁的 条件判断!</h1>
+            {unreadMessages.length > 0 &&
+                <h2>
+                    You have {unreadMessages.length} unread messages.
+        </h2>
+            }
+        </div>
+    );
+}
+
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+ReactDOM.render(
+    <Mailbox unreadMessages={messages} />,
+    document.getElementById('messages')
+);
+
+//阻止组件渲染
+function WarningBanner(props) {
+    if (!props.warn) {
+        return null;
+    }
+
+    return (
+        <div className="warning">
+            Warning!
+        </div>
+    );
+}
+
+class Page extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { showWarning: true }
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick() {
+        this.setState(prevState => ({
+            showWarning: !prevState.showWarning
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <WarningBanner warn={this.state.showWarning} />
+                <button onClick={this.handleToggleClick}>
+                    {this.state.showWarning ? 'Hide' : 'Show'}
+                </button>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Page />,
+    document.getElementById('page')
+);
