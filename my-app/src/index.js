@@ -72,6 +72,24 @@ class Clock extends React.Component {
         super(props);
         this.state = { date: new Date() };
     }
+    //ES6 生命周期方法->挂载 componentDidMount 是 组件第一次加载到DOM中的时候执行
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick2(),
+            1000
+        );
+    }
+    //ES6 生命周期方法->卸载 componentWillUnmount 是 组件从DOM中移除的时候执行
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+    //类中的方法
+    tick2() {
+        //使用 this.setState() 来更新组件局部状态
+        this.setState({
+            date: new Date()
+        });
+    }
     render() {
         return (
             <div>
