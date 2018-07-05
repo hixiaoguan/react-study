@@ -104,3 +104,22 @@ ReactDOM.render(
     <Clock />,
     document.getElementById('clock')
 );
+
+//React 的事件绑定 注意与普通JS的区别
+function ActionLink() {
+    function handleClick(e) {
+        e.preventDefault();
+        alert('你点击了我');
+    }
+
+    return (
+        <a href="#" onClick={handleClick}>
+           React 点击事件绑定 Click me
+    </a>
+    );
+}
+
+ReactDOM.render(
+    <ActionLink />,
+    document.getElementById('actionLink')
+);
