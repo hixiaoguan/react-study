@@ -123,3 +123,33 @@ ReactDOM.render(
     <ActionLink />,
     document.getElementById('actionLink')
 );
+
+//React 事件又一个复杂一点的栗子
+class Toggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { isToggleOn: true };
+        // 回调用法 这样可以将点击事件事 传递 参数 this 给handleClick方法
+        // 这里有点像加了个监听addEventListener的感觉
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleClick}>
+                {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Toggle />,
+    document.getElementById('toggle')
+);
