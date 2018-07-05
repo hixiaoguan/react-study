@@ -44,3 +44,23 @@ ReactDOM.render(
     diyEle,
     document.getElementById('diyComponent')
 );
+
+//组件的组合嵌套
+function ShowName(props) {
+    return <h1>Hello, {props.name}</h1>;
+}
+
+function InClass() {
+    return (
+        <div>
+            <ShowName name="光头强" />
+            <ShowName name="熊大" />
+            <ShowName name="熊二" />
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <InClass />,
+    document.getElementById('xiongChuMo')
+);
