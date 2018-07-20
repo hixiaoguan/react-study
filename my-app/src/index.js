@@ -366,12 +366,29 @@ ReactDOM.render(
 );
 //状态提升
 function BoilingVerdict(props) {
-    if (props.celsius >= 100) {
-        return <p>水会烧开</p>;
+    var openNum = 100;
+    var sName = '摄氏度';
+    var red = '#ff0000';
+    var dushu = props.celsius;
+    if (!props.celsius){
+        dushu = 0;
     }
-    return <p>水不会烧开</p>;
+    if (props.scale =='f'){
+        openNum = 212;
+        sName = '华氏度';
+    }
+    if (props.celsius >= openNum) {
+        return <p>{props.celsius} {sName}水<span style={{color:red}}>会</span>烧开</p>;
+    }
+    return <p>{dushu} {sName}水<span style={{ color: red }}>不会</span>烧开</p>;
 }
-class Calculator extends React.Component {
+//抽离出来的子组件
+const scaleNames = {
+    c: '摄氏度',
+    f: '华氏度'
+};
+
+class TemperatureInput extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -384,12 +401,28 @@ class Calculator extends React.Component {
 
     render() {
         const temperature = this.state.temperature;
+        const scale = this.props.scale;
         return (
             <fieldset>
-                <legend>输入一个摄氏温度</legend>
-                <input value={temperature} onChange={this.handleChange} />
-                <BoilingVerdict celsius={parseFloat(temperature)} />
+                <legend>请输入 {scaleNames[scale]}:</legend>
+                <input value={temperature}
+                    onChange={this.handleChange} />
+                <BoilingVerdict
+                    celsius={parseFloat(temperature)} 
+                    scale={scale}
+                    />
             </fieldset>
+        );
+    }
+}
+//被提升为父组件
+class Calculator extends React.Component {
+    render() {
+        return (
+            <div>
+                <TemperatureInput scale="c" />
+                <TemperatureInput scale="f" />
+            </div>
         );
     }
 }
