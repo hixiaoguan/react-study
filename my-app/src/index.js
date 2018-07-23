@@ -113,7 +113,7 @@ function ActionLink() {
     }
 
     return (
-        <a href="#" onClick={handleClick}>
+        <a onClick={handleClick}>
            React 点击事件绑定 Click me
     </a>
     );
@@ -373,7 +373,7 @@ function BoilingVerdict(props) {
     if (!props.celsius){
         dushu = 0;
     }
-    if (props.scale =='f'){
+    if (props.scale === 'f'){
         openNum = 212;
         sName = '华氏度';
     }
@@ -429,4 +429,102 @@ class Calculator extends React.Component {
 ReactDOM.render(
     <Calculator />,
     document.getElementById('statusUp')
+);
+/**
+ * 组合 vs 继承
+ * React 具有强大的组合模型，我们建议使用组合而不是继承来复用组件之间的代码。
+ */
+function FancyBorder(props) {
+    return (
+        <div className={'FancyBorder FancyBorder-' + props.color}>
+            {props.children}
+        </div>
+    );
+}
+
+function WelcomeDialog() {
+    return (
+        <FancyBorder color="red">
+            <h1 className="Dialog-title">
+                Welcome
+      </h1>
+            <p className="Dialog-message">
+                Thank you for visiting our spacecraft!
+      </p>
+        </FancyBorder>
+    );
+}
+
+ReactDOM.render(
+    <WelcomeDialog />,
+    document.getElementById('dialog')
+);
+
+// 常用用法
+function Dialog(props) {
+    return (
+        <FancyBorder color="blue">
+            <h1 className="Dialog-title">
+                {props.title}
+            </h1>
+            <p className="Dialog-message">
+                {props.message}
+            </p>
+        </FancyBorder>
+    );
+}
+
+function WelcomeDialog2() {
+    return (
+        <Dialog
+            title="Welcome2"
+            message="Thank you for visiting our spacecraft2!" />
+
+    );
+}
+
+ReactDOM.render(
+    <WelcomeDialog2 />,
+    document.getElementById('dialog2')
+);
+
+/**
+ * 布局组件化 - 实例
+ */
+function Contacts() {
+    return <div className="Contacts" > Left </div>;
+}
+
+function Chat() {
+    return <div className="Chat"> Right </div>;
+}
+
+function SplitPane(props) {
+    return (
+        <div className="SplitPane">
+            <div className="SplitPane-left">
+                {props.left}
+            </div>
+            <div className="SplitPane-right">
+                {props.right}
+            </div>
+        </div>
+    );
+}
+
+function Layout() {
+    return (
+        <SplitPane
+            left={
+                <Contacts />
+            }
+            right={
+                <Chat />
+            } />
+    );
+}
+
+ReactDOM.render(
+    <Layout />,
+    document.getElementById('layout')
 );
