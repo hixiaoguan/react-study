@@ -15,4 +15,6 @@ $ npm start
  - index.js 是入口文件,index.css是样式文件，npm start 会自动加载这两个文件到public首页
 
  - npm run build 会打包 src 和 public 目录下文件 到build
+
+ ### 教程：https://www.reactjscn.com/docs/hello-world.html
  
